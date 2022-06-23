@@ -12,6 +12,34 @@ function getDayOrNight() {
     day = "night";
   }
 }
+/*---------------------------------------------------------------------------*/
+
+function getWeeklyForecast() {
+  let weeklyForecastElem = document.querySelector("#weekly-Forecast");
+
+  let weeklyForecastHTML = `<div class="row m-1 pb-3">`;
+  let days = ["Thurs", "Fri", "Sat", "Sun", "Mon", "Tues"];
+  days.forEach(function (day) {
+    weeklyForecastHTML =
+      weeklyForecastHTML +
+      `
+      <div class="col-sm-2 p-0">
+        <div class="card m-1 p-2 h-100 bg-card-details">
+          <div class="forecast-date p-0">${day}
+          </div>
+          <img src="./media/dustSand.png" class="forecast-icon" id="forecast-icon" alt="weekly forecast weather Icon">
+          <div>
+          <span class="forecast-max-temp">89°</span> | 
+          <span class="forecast-min-temp">79°</span>
+          </div>
+        </div>
+      </div>
+      `;
+  });
+
+  weeklyForecastHTML = weeklyForecastHTML + `</div>`;
+  weeklyForecastElem.innerHTML = weeklyForecastHTML;
+}
 
 /*------------Updating the weather Icons------------------------------------*/
 function getAtmosphereIcon(response) {
@@ -370,10 +398,7 @@ function getGreeting(now) {
   return `${greeting}`;
 }
 
-/*Fahrenheit/Celsisu function
-(17) in Celsius and add link to covert it to Fahrenheit. When clicking 
-on it, it should covert the temperature to Fahrenheit. When clicking on 
-Celsius, it should convert it back to Celsius*/
+//Fahrenheit/Celsisu function
 
 function displayFahrenheit(event) {
   event.preventDefault();
@@ -416,6 +441,9 @@ function displayCelsius(event) {
   windSpeed.innerHTML = `${windKmH} km/h`;
 }
 
+//Forecast
+getWeeklyForecast();
+
 //Current date
 let now = new Date();
 let dateToday = document.querySelector("#date-today");
@@ -444,6 +472,6 @@ fahrenheitBttn.addEventListener("click", displayFahrenheit);
 let celsiusBttn = document.querySelector("#celsius-link");
 celsiusBttn.addEventListener("click", displayCelsius);
 
-//Search Engine
+//Search Engine Form Submission
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", searchLocation);
