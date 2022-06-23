@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="src/styles.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Wk7 Homework: Vanilla Weather App </title>
+  </head>
+  <body>
+    <div class="container p-2">
+      <div class="weatherApp">
+        <!--1 Row with 2 Col - set as 2 cards-->
+        <div class="row p-2 main">
+          <!--Column 1, Card 1-->
+          <div class="col-sm-3 p-0">
+            <!--Card 1, h-100: same card heights-->
+            <div class="card p-3 h-100 bg-card-left">
+              <div class="row p-0 ">
+                <form id="search-form">
+                  <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Search for a city..."
+                    autocomplete="off"
+                    autofocus="on"
+                    class="rounded"
+                  />
+                </form>
+              </div>
+              <h1 class="location" id="location"></h1>           
+            <div class="weatherForecast">
+                  <span class="temp" id="temperature"></span><small class="units"><a href="#" class="active" id="celsius-link">°C</a>  | 
+                        <a href="#" id="fahrenheit-link">°F</a>
+                    </small>
+   
+                <br>
+                <div class = "weatherStatus"></div>
+                <img src="./media/dustSand.png" class="weatherIcon-main" id="weatherIconMain" alt="weather Icon">
+            </div>
+
+              <div class="row p-0 mt-2">
+                <div class="col p-1 just-left">
+                  <img src="./media/feelsLikeTemp.png" class="feelsLikeIcon" alt="thermostat">
+                  Feels like: <span id="feelsLike"></span> 
+                </div>
+              </div>   
+              <div class="row p-0">
+                <div class="col p-1 just-left">
+                  <img src="./media/humidity.png" class="humidityIcon" alt="humidity icon">
+                  Humidity: <span id="humidity"></span>
+                </div>
+              </div>
+              <div class="row p-0">
+                <div class="col p-1 just-left">
+                  <img src="./media/windSpeed.png" class="windSpeedIcon" alt="wind speed icon"> 
+                  Wind: <span id="windSpeed"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Column 2, Card 2-->
+          <div class="col-sm-9 p-0">
+            <div class="card p-1 h-100 bg-card-right">
+              <!--Card 2: Row 1 has 2 Columns-->
+              <div class="row p-0 m-1">
+                <div class="col-sm-9 p-0">
+                  <div class="greetingWrapper">
+                  <span class="dateToday m-1 p-0" id="date-today">
+                  </span> - <span id="time-now"></span> 
+                  <br>
+                  <span class="greeting" id="greeting"></span> 
+                  <img src="./media/afternoon.png" class="greetingIcon" id="greetingIcon" alt="Greeting Icon">
+                                 
+                  </div>   
+                </div>
+                <div class="col-sm-3 p-0">
+                  <br>
+                  
+                   <button type="button" class="btn btn-warning p-1 m-0" id="currentLocationBttn">Check my location</button>
+                  
+                  
+                </div>
+              </div>
+              <!--Card 2, 1 Card with Table-->
+                  <div class="card p-1 m-1 bg-card-details">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>
+                          Time
+                          </th>
+                          <th> Condition</th>
+                          <th> Temp</th>
+                          <th> Humdity</th>
+                          <th> Wind</th>
+                        </tr>
+                        <tbody>
+                      <tr>
+                      <td>1:00PM</td>
+                      <td>⛅Partly Cloudy</td>
+                      <td>88°</td>
+                      <td>68%</td>
+                      <td>12mph</td>
+                    </tr>
+                    <tr>
+                      <td>2:00PM</td>
+                      <td>⛅Partly Cloudy</td>
+                      <td>88°</td>
+                      <td>68%</td>
+                      <td>13mph</td>
+                    </tr>
+                    <tr>
+                      <td>3:00PM</td>
+                      <td>⛅Partly Cloudy</td>
+                      <td>88°</td>
+                      <td>70%</td>
+                     <td>13mph</td>
+                    </tr>
+                    <tr>
+                      <td>4:00PM</td>
+                      <td>⛅Partly Cloudy</td>
+                      <td>87°</td>
+                      <td>74%</td>
+                      <td>12mph</td>
+                    </tr>
+                    <tr>
+                      <td>5:00PM</td>
+                      <td>⛅Partly Cloudy</td>
+                      <td>86°</td>
+                      <td>77%</td>
+                      <td>12mph</td>
+                    </tr>
+                   <tr>
+                      <td>6:00PM</td>
+                      <td>⛅Partly Cloudy</td>
+                      <td>84°</td>
+                      <td>79%</td>
+                      <td>11mph</td>
+                    </tr>
+                        </tbody>
+                      </thead>
+                    </table>
+                  </div>
+              <hr class="m-1" />
+              <!--Card 2, Row 3 has 6 Columns/Cards-->
+              <div class="row m-1 pb-3">
+                <!--Row 3, Card 1-->
+                <div class="col-sm-2 p-0">
+                  <div class="card m-1 p-2 h-100 bg-card-details">
+                    Sun 15<br />
+                    <p class="weatherIcon">🌥</p>
+                    89° | 79°
+                  </div>
+                </div>
+
+                <!--Row 3, Card 2-->
+                <div class="col-sm-2 p-0">
+                  <div class="card m-1 p-2 h-100 bg-card-details">
+                    Mon 16<br />
+                    <p class="weatherIcon">⛈</p>
+                    88° | 80°
+                  </div>
+                </div>
+
+                <!--Row 3, Col 3, Card 3-->
+                <div class="col-sm-2 p-0">
+                  <div class="card m-1 p-2 h-100 bg-card-details">
+                    Tues 17<br />
+                    <p class="weatherIcon">🌥</p>
+                    88° | 80°
+                  </div>
+                </div>
+
+                <!--Row 3, Col 4, Card 4-->
+                <div class="col-sm-2 p-0">
+                  <div class="card m-1 p-2 h-100 bg-card-details">
+                    Wed 18<br />
+                    <p class="weatherIcon">⛈</p>
+                    88° | 80°
+                  </div>
+                </div>
+
+                <!--Row 3, Col 5, Card 5-->
+                <div class="col-sm-2 p-0">
+                  <div class="card m-1 p-2 h-100 bg-card-details">
+                    Thurs 19<br />
+                    <p class="weatherIcon">⛈</p>
+                    88° | 79°
+                  </div>
+                </div>
+
+                <!--Row 3, Col 6, Card 6-->
+                <div class="col-sm-2 p-0">
+                  <div class="card m-1 p-2 h-100 bg-card-details">
+                    Fri 20<br />
+                    <p class="weatherIcon">⛈</p>
+                    88° | 80°
+                  </div>
+                </div>
+              </div>
+              <!--End of Row 3, 6 Cards-->
+            </div>    
+          </div>   
+          <footer>
+                       
+            <span class="credit-line"> 
+            Open-source code on
+            <a href="https://github.com/Teewawa" class="src-link">GitHub</a>
+            by Tiara Mendiola
+            </span>
+          </footer>
+        </div>      
+      </div>   
+    </div>
+  </body>
+  <script src="src/index.js"></script>
+</html>

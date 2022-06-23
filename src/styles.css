@@ -1,0 +1,144 @@
+body {
+  background: url(../media/pinkClouds.jpg);
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0vw;
+}
+.weatherApp {
+  margin: 0 auto;
+  max-width: 900px;
+  margin-top: 35px;
+}
+.card {
+  text-align: center;
+}
+#search {
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(192, 192, 192, 0.4);
+  width: 50%;
+}
+.greeting {
+  text-align: left;
+}
+#date-today {
+  text-align: left;
+}
+h3 #time-now {
+  text-align: right;
+}
+button {
+  width: 150px;
+  text-align: left;
+}
+.card.bg-card-left {
+  background-color: rgba(247, 244, 245, 0.5);
+}
+.just-right {
+  text-align: center;
+}
+
+.just-left {
+  text-align: center;
+}
+.card.bg-card-right {
+  background-color: rgba(247, 244, 245, 0.5);
+}
+
+.card.bg-card-details {
+  background-color: rgba(247, 244, 245, 0.4);
+}
+
+.location {
+  font-size: 25px;
+  margin: 20px auto 1px;
+}
+.temp {
+  padding: 2px 0px 0px 0px;
+  font-size: 60px;
+  position: relative;
+  right: -20px;
+}
+.active {
+  color: black;
+}
+.units {
+  position: relative;
+  padding: 0px;
+  margin: 0px;
+  right: -22px;
+  top: -30px;
+}
+.weatherStatus {
+  font-size: 16px;
+  padding: 0px;
+  margin: 0px;
+}
+.weatherIcon-main {
+  max-width: 85px;
+  padding: 0px;
+  margin: 0px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#fahrenheit-link {
+  text-decoration: none;
+}
+
+#fahrenheit-link:hover {
+  text-decoration: none;
+}
+#celsius-link {
+  text-decoration: none;
+}
+#celsius-link:hover {
+  text-decoration: none;
+}
+.feelsLikeIcon {
+  max-width: 35px;
+  padding: 0px;
+  margin: 0px;
+}
+.humidityIcon {
+  max-width: 35px;
+  padding: 0px;
+  margin: 0px;
+}
+.windSpeedIcon {
+  max-width: 35px;
+  padding: 0px;
+  margin: 0px;
+}
+.greetingWrapper {
+  text-align: left;
+  padding: 0px;
+  margin: 0px;
+}
+.greeting {
+  font-size: 35px;
+  padding: 0px;
+  margin: 0px;
+}
+.greetingIcon {
+  max-width: 45px;
+  padding: 0px;
+  margin: 0px;
+  position: relative;
+  top: -10px;
+}
+.weatherIcon {
+  font-size: 35px;
+  margin: 1px;
+  padding: 2px;
+}
+table {
+  padding: 1px;
+  margin: 1px;
+}
+.credit-line {
+  color: white;
+}
+.src-link {
+  color: white;
+}
