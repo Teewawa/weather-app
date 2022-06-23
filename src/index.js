@@ -13,10 +13,43 @@ function getDayOrNight() {
   }
 }
 /*---------------------------------------------------------------------------*/
-
-function getWeeklyForecast() {
+function getWeeklyForecast(response) {
+  console.log(response.data);
+  let lattitude = response.data.coord.lat;
+  let longitude = response.data.coord.lon;
+  let apiKey = "32002ce1ac753de34a94e79ba08a9e9b";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lattitude}&lon=${longitude}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=metric`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayWeeklyForecast);
+}
+function displayWeeklyForecast(response) {
+  console.log(response.data.daily);
   let weeklyForecastElem = document.querySelector("#weekly-Forecast");
+  let weeklyForecastHTML = `<div class="row m-1 pb-3">`;
+  let days = ["Thurs", "Fri", "Sat", "Sun", "Mon", "Tues"];
+  days.forEach(function (day) {
+    weeklyForecastHTML =
+      weeklyForecastHTML +
+      `
+      <div class="col-sm-2 p-0">
+        <div class="card m-1 p-2 h-100 bg-card-details">
+          <div class="forecast-date p-0">${day}
+          </div>
+          <img src="./media/dustSand.png" class="forecast-icon" id="forecast-icon" alt="weekly forecast weather Icon">
+          <div>
+          <span class="forecast-max-temp">89°</span> | 
+          <span class="forecast-min-temp">79°</span>
+          </div>
+        </div>
+      </div>
+      `;
+  });
 
+  weeklyForecastHTML = weeklyForecastHTML + `</div>`;
+  weeklyForecastElem.innerHTML = weeklyForecastHTML;
+}
+function displayDefaultForecast() {
+  let weeklyForecastElem = document.querySelector("#weekly-Forecast");
   let weeklyForecastHTML = `<div class="row m-1 pb-3">`;
   let days = ["Thurs", "Fri", "Sat", "Sun", "Mon", "Tues"];
   days.forEach(function (day) {
@@ -267,7 +300,11 @@ function getWeather(response) {
   getHumidity(response);
   getWindSpeed(response);
   updateMainWeatherIcon(response);
+  //getHourlyForecast(response);
+  getWeeklyForecast(response);
 }
+
+/*---------------------------------------------------------------------------------------------*/
 
 function searchLocation(event) {
   event.preventDefault();
@@ -442,7 +479,7 @@ function displayCelsius(event) {
 }
 
 //Forecast
-getWeeklyForecast();
+displayDefaultForecast();
 
 //Current date
 let now = new Date();
