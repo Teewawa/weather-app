@@ -142,3 +142,19 @@ table {
 .src-link {
   color: white;
 }
+
+.forecast-date {
+  font-size: 16px;
+}
+.forecast-icon {
+  max-width: 60px;
+  padding: 0px;
+  margin: 0px auto;
+}
+.forecast-max-temp {
+  font-size: 14px;
+  font-weight: bold;
+}
+.forecast-min-temp {
+  font-size: 14px;
+}
