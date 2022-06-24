@@ -13,6 +13,85 @@ function getDayOrNight() {
   }
 }
 /*---------------------------------------------------------------------------*/
+
+function updateWeatherIcon(main) {
+  console.log(`main is ${main}`);
+  let imgSrc = "";
+
+  //compare main weather description then call specific function
+  if (main === "Clear") {
+    imgSrc = "clearSky";
+  } else if (main === "Clouds") {
+    imgSrc = "clouds";
+  } else if (main === "Snow") {
+    imgSrc = "snow";
+  } else if (main === "Rain") {
+    imgSrc = "rain";
+  } else if (main === "Drizzle") {
+    gmgSrc = "drizzle";
+  } else if (main === "Thunderstorm") {
+    imgSrc = "thunderstorm";
+  } else {
+    imgSrc = "dustSand";
+  }
+  return imgSrc;
+}
+
+function formatMinTemp(minTemp) {
+  return Math.round(minTemp);
+}
+function formatMaxTemp(maxTemp) {
+  return Math.round(maxTemp);
+}
+
+function formatDT(timestamp) {
+  let now = new Date(timestamp * 1000);
+  let day = now.getDay();
+  let date = now.getDate();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+
+  return `${days[day]} ${date}`;
+}
+
+function displayWeeklyForecast(response) {
+  let weeklyForecastElem = document.querySelector("#weekly-Forecast");
+  console.log(response.data.daily);
+  let forecast = response.data.daily;
+  console.log(forecast);
+  let weeklyForecastHTML = `<div class="row m-1 pb-3">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index === 0) {
+      //do nothing
+    } else if (index < 7) {
+      weeklyForecastHTML =
+        weeklyForecastHTML +
+        `
+      <div class="col-sm-2 p-0">
+        <div class="card m-1 p-2 h-100 bg-card-details">
+          <div class="forecast-date p-0">${formatDT(forecastDay.dt)}
+          </div>
+          
+          <img src="./media/${updateWeatherIcon(
+            forecastDay.weather[0].main
+          )}.png" class="forecast-icon" id="forecast-icon" alt="weekly forecast weather Icon">
+          <div>
+          <span class="forecast-max-temp">${formatMaxTemp(
+            forecastDay.temp.max
+          )}°</span> | 
+          <span class="forecast-min-temp">${formatMinTemp(
+            forecastDay.temp.min
+          )}°</span>
+          </div>
+        </div>
+      </div>
+      `;
+    }
+  });
+
+  weeklyForecastHTML = weeklyForecastHTML + `</div>`;
+  weeklyForecastElem.innerHTML = weeklyForecastHTML;
+}
+
 function getWeeklyForecast(response) {
   console.log(response.data);
   let lattitude = response.data.coord.lat;
@@ -22,32 +101,7 @@ function getWeeklyForecast(response) {
   console.log(apiUrl);
   axios.get(apiUrl).then(displayWeeklyForecast);
 }
-function displayWeeklyForecast(response) {
-  console.log(response.data.daily);
-  let weeklyForecastElem = document.querySelector("#weekly-Forecast");
-  let weeklyForecastHTML = `<div class="row m-1 pb-3">`;
-  let days = ["Thurs", "Fri", "Sat", "Sun", "Mon", "Tues"];
-  days.forEach(function (day) {
-    weeklyForecastHTML =
-      weeklyForecastHTML +
-      `
-      <div class="col-sm-2 p-0">
-        <div class="card m-1 p-2 h-100 bg-card-details">
-          <div class="forecast-date p-0">${day}
-          </div>
-          <img src="./media/dustSand.png" class="forecast-icon" id="forecast-icon" alt="weekly forecast weather Icon">
-          <div>
-          <span class="forecast-max-temp">89°</span> | 
-          <span class="forecast-min-temp">79°</span>
-          </div>
-        </div>
-      </div>
-      `;
-  });
 
-  weeklyForecastHTML = weeklyForecastHTML + `</div>`;
-  weeklyForecastElem.innerHTML = weeklyForecastHTML;
-}
 function displayDefaultForecast() {
   let weeklyForecastElem = document.querySelector("#weekly-Forecast");
   let weeklyForecastHTML = `<div class="row m-1 pb-3">`;
@@ -477,9 +531,6 @@ function displayCelsius(event) {
   let windSpeed = document.querySelector("#windSpeed");
   windSpeed.innerHTML = `${windKmH} km/h`;
 }
-
-//Forecast
-displayDefaultForecast();
 
 //Current date
 let now = new Date();
