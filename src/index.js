@@ -1,19 +1,237 @@
-function getDayOrNight() {
-  //try using the dt in response.data
-  let now = new Date();
-  let hour = getHours();
-  let day = "day";
+//--------------------------------------TEST ZONE START-----------------------------------//
 
-  if (hour > 6 && hour < 18) {
-    day = "day";
-  } else if (hour < 7) {
-    day = "night";
-  } else if (hour > 17) {
-    day = "night";
-  }
+function getMonth(nd) {
+  let months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  let month = months[nd.getMonth()];
+  return month;
 }
-/*---------------------------------------------------------------------------*/
 
+function getDay(nd) {
+  let days = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
+  let day = days[nd.getDay()];
+  return day;
+}
+
+//------------------------------------------------------------------------------------------------------------//
+
+//Format time displayed on page
+function formatHourlyTime(t) {
+  let dateTimeArr = t.trim().split(/\s+/);
+  let getTime = dateTimeArr[1];
+  let timeArr = getTime.trim().split(":");
+  let hour = timeArr[0];
+  let min = timeArr[1];
+  let meridiem = "";
+
+  if (hour < 12) {
+    meridiem = "AM";
+  } else if (hour === 12) {
+    meridiem = "PM";
+  } else if (hour === 24) {
+    hour = hour - 12;
+    meridiem = "AM";
+  } else {
+    hour = hour - 12;
+    meridiem = "PM";
+  }
+
+  if (hour === 0) {
+    hour = 12;
+  }
+  let time = `${hour}:${min} ${meridiem}`;
+
+  return time;
+}
+
+//Formats city's date time: YYYY-mm-DD hr:min (hr:00) for iteration conditions
+function formatCityDateTime(response) {
+  let lastUpdate = response.data.current.last_updated;
+  let arr = lastUpdate.trim().split(/\s+/);
+  let lastUpdateDate = arr[0];
+  let lastUpdateTime = arr[1];
+  arr2 = lastUpdateTime.trim().split(":");
+  arr2.splice(1, 1, "00");
+  let cityDate = lastUpdateDate.toString();
+  let cityTimeHr = arr2.join(":").toString();
+  let cityDateTime = `${cityDate} ${cityTimeHr}`;
+  return cityDateTime;
+}
+
+function displayHourlyWeather(response) {
+  //console.log(`date time ${dateTime}`);
+  console.log(`this is history data`);
+  console.log(response);
+  let cityDateTime = formatCityDateTime(response);
+  console.log(`cityDateTime ${cityDateTime}`);
+
+  //Manage inner HTML for hourly weather forecast
+  let hourlyForecastElem = document.querySelector("#hourly-Forecast");
+  let hourlyForecastHTML = `<div class="card p-1 m-1 bg-card-details">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>
+                          Time
+                          </th>
+                          <th> Condition</th>
+                          <th> Temp</th>
+                          <th> Humdity</th>
+                          <th> Wind</th>
+                        </tr>
+                        <tbody>`;
+
+  let hourlyForecast = response.data.forecast.forecastday[0].hour;
+  //Iterate through first day to find match time and date, get index//
+  //console.log(hourlyForecast.forecastday[0].hour[0]);
+  let indexFlag = false;
+  let counter = 0;
+
+  hourlyForecast.forEach(function (forecast, index) {
+    //console.log(cityDateTime);
+    if (indexFlag === true && counter < 6) {
+      console.log(`counter: ${counter}`);
+      console.log(`indexFlagged- index:${index}`);
+      counter = counter + 1;
+      //Manage the data for hourly data
+
+      hourlyForecastHTML =
+        hourlyForecastHTML +
+        `<tr>
+                      <td class="hourlyTime">${formatHourlyTime(
+                        forecast.time
+                      )}</td>
+                      <td class="hourlyDescription">⛅${
+                        forecast.condition.text
+                      }</td>
+                      <td class="hourlyTemp">${Math.round(
+                        forecast.temp_c
+                      )}°C</td>
+                      <td class="hourlyHumdity">${forecast.humidity}%</td>
+                      <td class="hourlyWindSpeed">${Math.round(
+                        forecast.wind_kph
+                      )}km/h</td>
+                    </tr>`;
+    }
+
+    if (forecast.time === cityDateTime) {
+      console.log(`index: ${index}`);
+      console.log(forecast.time);
+      console.log(`I found it`);
+      indexFlag = true;
+    }
+  });
+
+  //Get index and iterate to display data
+  /*  indexFlag = indexFlag + 1;
+  hourlyForecastDay1.forEach(function (forecastday1, index) {
+    if (index > indexFlag && counter < 4) {
+      
+      counter = counter + 1;
+    } else {
+      //next
+    }
+  });
+
+  //End of iterations
+*/ //closing inner html data
+  hourlyForecastHTML =
+    hourlyForecastHTML +
+    `       </tbody>
+          </thead>
+        </table>
+      </div>
+     </div>`;
+  hourlyForecastElem.innerHTML = hourlyForecastHTML;
+}
+
+//Utilizes api from weatherapi for hourly weather data
+function getHourlyData(lattitude, longitude) {
+  let lat = lattitude;
+  let lon = longitude;
+  let apiKey = "15c74ef636a145179c8223450222506";
+  apiUrl = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${lon}&days=2&aqi=no&alerts=no
+`;
+  axios.get(apiUrl).then(displayHourlyWeather);
+}
+//-------------------------------------------------------------------------------------------------------------//
+
+function displayCityTime(nd) {
+  let hr = String(nd.getHours()).padStart(2, "0");
+  let min = String(nd.getMinutes()).padStart(2, "0");
+  console.log(`display city time: ${hr}:${min}`);
+
+  //___________________add inner HTML here
+}
+
+function displayCityDate(nd) {
+  let day = getDay(nd);
+  let month = getMonth(nd);
+  let date = nd.getDate();
+  let year = nd.getFullYear();
+  console.log(`display city date: ${month} ${date}, ${year}`);
+  //___________________add inner HTML here
+}
+
+function calculateUTC(localTime, localOffset) {
+  let utc = localTime + localOffset * 60000;
+  return utc;
+}
+
+function getLocalTimezoneOffset() {
+  let now = new Date();
+  let localOffset = now.getTimezoneOffset();
+  return localOffset;
+}
+
+function getLocalTime() {
+  let now = new Date();
+  let localTime = now.getTime();
+  let lt = new Date(localTime);
+  console.log(`lt: ${lt}`);
+  return localTime;
+}
+
+//Notes--open weather timezone is in seconds
+function calculateCityTime(response) {
+  //Calculates city's time
+  let localTime = getLocalTime();
+  let localOffset = getLocalTimezoneOffset();
+  let utc = calculateUTC(localTime, localOffset);
+  let cityTimezoneOffset = response.data.timezone_offset;
+  let cityTime = utc + 1000 * cityTimezoneOffset;
+  let nd = new Date(cityTime);
+  let lat = response.data.lat;
+  let lon = response.data.lon;
+  //display data on page
+  displayCityDate(nd);
+  displayCityTime(nd);
+  getHourlyData(lat, lon);
+}
+
+//--------------------------------------TEST ZONE END------------------------------------//
+
+function getHourlyForecast(response) {
+  //console.log("this is the get hourly function");
+  let lattitude = response.data.coord.lat;
+  let longitude = response.data.coord.lon;
+  let apiKey = "32002ce1ac753de34a94e79ba08a9e9b";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lattitude}&lon=${longitude}&exclude=minutely,weekly,alerts&appid=${apiKey}&units=metric`;
+  //console.log(apiUrl);
+  axios.get(apiUrl).then(calculateCityTime);
+}
 /*----------------------------------------------------------------------------------------------------------------------*/
 
 //Date format: Day, Month DD, YYYY
@@ -149,11 +367,9 @@ function displayCelsius(event) {
 
 //----------------------------------------------------------------------------------------------------------------------//
 
-//function getHourlyForecast(){}
-
 //Handles & displays the weekly forecast weather icon images
 function updateWeatherIcon(main) {
-  console.log(`main is ${main}`);
+  // console.log(`main is ${main}`);
   let imgSrc = "";
 
   //compare main weather description then call specific function
@@ -197,8 +413,9 @@ function formatDT(timestamp) {
 //Displays the weekly forecast; several function calls to format temps and display weather icon
 function displayWeeklyForecast(response) {
   let weeklyForecastElem = document.querySelector("#weekly-Forecast");
-  console.log(response.data.daily);
+  // console.log(response.data.daily);
   let forecast = response.data.daily;
+  console.log(`jsesgss`);
   console.log(forecast);
   let weeklyForecastHTML = `<div class="row m-1 pb-3">`;
   forecast.forEach(function (forecastDay, index) {
@@ -236,12 +453,12 @@ function displayWeeklyForecast(response) {
 
 //Gets the weekly forecast, utilizes location coordinates and one call api from open weather map
 function getWeeklyForecast(response) {
-  console.log(response.data);
+  // console.log(response.data);
   let lattitude = response.data.coord.lat;
   let longitude = response.data.coord.lon;
   let apiKey = "32002ce1ac753de34a94e79ba08a9e9b";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lattitude}&lon=${longitude}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=metric`;
-  console.log(apiUrl);
+  //console.log(apiUrl);
   axios.get(apiUrl).then(displayWeeklyForecast);
 }
 
@@ -394,14 +611,14 @@ function getClearSkyIcon(response) {
 //Gets 'main' weather description
 function getMainWeather(response) {
   let main = response.data.weather[0].main;
-  console.log(`get main weather ${main}`);
+  //console.log(`get main weather ${main}`);
   return main;
 }
 
 //-----------------------Collection of function calls to display the Current Weather Icon------------------------//
 function updateMainWeatherIcon(response) {
   let main = getMainWeather(response);
-  console.log(`update main: main is ${main}`);
+  //console.log(`update main: main is ${main}`);
 
   //compare main weather description then call specific function
   if (main === "Clear") {
@@ -468,6 +685,7 @@ function getLocation(response) {
   let timeZone = response.data.timezone;
   locationElement.innerHTML = `${location}`;
   console.log(response.data);
+  return city;
 }
 
 //---------------------Collection of function calls to display the weather forecast----------------------------------//
@@ -479,7 +697,7 @@ function getWeather(response) {
   getHumidity(response);
   getWindSpeed(response);
   updateMainWeatherIcon(response);
-  //getHourlyForecast(response);
+  getHourlyForecast(response);
   getWeeklyForecast(response);
 }
 
