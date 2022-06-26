@@ -12,7 +12,7 @@
     />
     <link rel="stylesheet" href="src/styles.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <title>Wk7 Homework: Vanilla Weather App </title>
+    <title>Wk7 Homework: Vanilla Weather App</title>
   </head>
   <body>
     <div class="container p-2">
@@ -23,7 +23,7 @@
           <div class="col-sm-3 p-0">
             <!--Card 1, h-100: same card heights-->
             <div class="card p-3 h-100 bg-card-left">
-              <div class="row p-0 ">
+              <div class="row p-0">
                 <form id="search-form">
                   <input
                     type="text"
@@ -35,23 +35,34 @@
                   />
                 </form>
               </div>
-              <h1 class="location" id="location"></h1>           
-            <div class="weatherForecast">
-                  <span class="temp" id="temperature"></span><small class="units"><a href="#" class="active" id="celsius-link">°C</a>  | 
-                        <a href="#" id="fahrenheit-link">°F</a>
-                    </small>
-   
-                <br>
-                <div class = "weatherStatus"></div>
-                <img src="./media/dustSand.png" class="weatherIcon-main" id="weatherIconMain" alt="weather Icon">
-            </div>
+              <h1 class="location" id="location"></h1>
+              <div class="weatherForecast">
+                <span class="temp" id="temperature"></span
+                ><small class="units"
+                  ><a href="#" class="active" id="celsius-link">°C</a> |
+                  <a href="#" id="fahrenheit-link">°F</a>
+                </small>
 
+                <br />
+                <div class="weatherStatus"></div>
+                <img
+                  src="./media/dustSand.png"
+                  class="weatherIcon-main"
+                  id="weatherIconMain"
+                  alt="weather Icon"
+                />
+              </div>
+              
+                Check my location
+              </button>
+         <!---->
               <div class="row p-0 mt-2">
                 <div class="col p-1 just-left">
                   <img src="./media/feelsLikeTemp.png" class="feelsLikeIcon" alt="thermostat">
                   Feels like: <span id="feelsLike"></span> 
                 </div>
-              </div>   
+              </div> 
+ 
               <div class="row p-0">
                 <div class="col p-1 just-left">
                   <img src="./media/humidity.png" class="humidityIcon" alt="humidity icon">
@@ -65,6 +76,9 @@
                 </div>
               </div>
             </div>
+    <!---->
+    
+    
           </div>
           <!--Column 2, Card 2-->
           <div class="col-sm-9 p-0">
@@ -73,25 +87,74 @@
               <div class="row p-0 m-1">
                 <div class="col-sm-9 p-0">
                   <div class="greetingWrapper">
-                  <span class="dateToday m-1 p-0" id="date-today">
-                  </span> - <span id="time-now"></span> 
-                  <br>
-                  <span class="greeting" id="greeting"></span> 
-                  <img src="./media/afternoon.png" class="greetingIcon" id="greetingIcon" alt="Greeting Icon">
-                                 
-                  </div>   
+                    <span class="dateToday m-1 p-0" id="date-today"> </span> -
+                    <span id="time-now"></span>
+                    <br />
+                    <span class="greeting" id="greeting"></span>
+                    <img
+                      src="./media/afternoon.png"
+                      class="greetingIcon"
+                      id="greetingIcon"
+                      alt="Greeting Icon"
+                    />
+                  </div>
                 </div>
                 <div class="col-sm-3 p-0">
-                  <br>
-                  
-                   <button type="button" class="btn btn-warning p-1 m-0" id="currentLocationBttn">Check my location</button>
-                  
-                  
+                  <br />
+
+                 <button type="button" class="btn btn-warning p-1 m-0" id="currentLocationBttn">Check my location</button>
+
                 </div>
               </div>
-              <!--Card 2, 1 Card with Table-->
-              <div class="hourlyForecast" id="hourly-Forecast">
+            
+            
+              <!-------------Testing-----------------------------------------------
+              <div class="card p-1 m-1 bg-card-details">  
+                <div class="testing" id="testing">
+                  <div>City:</div>
+                  <div>timezone:</div>
+                  <div>time:</div>
+                  <div>sunrise:</div>
+                  <span>sunset: </span>
+                </div>
+                
+
+                <div class="row p-0 mt-2">
+                  <div class="col p-1 just-left">
+                    <img
+                      src="./media/feelsLikeTemp.png"
+                      class="feelsLikeIcon"
+                      alt="thermostat"
+                    />
+                    Feels like: <span id="feelsLike"></span>
+                  </div>
+                  <div class="row p-0">
+                    <div class="col p-1 just-left">
+                      <img
+                        src="./media/humidity.png"
+                        class="humidityIcon"
+                        alt="humidity icon"
+                      />
+                      Humidity: <span id="humidity"></span>
+                    </div>
+                  </div>
+                  <div class="row p-0">
+                    <div class="col p-1 just-left">
+                      <img
+                        src="./media/windSpeed.png"
+                        class="windSpeedIcon"
+                        alt="wind speed icon"
+                      />
+                      Wind: <span id="windSpeed"></span>
+                    </div>
+                  </div>
+                </div>
+                      -----------End of testing-------------------------------------->
+                
+                <!--Card 2, 1 Card with Table-->
+                  <div class="hourlyForecast" id="hourly-Forecast">
                   <div class="card p-1 m-1 bg-card-details">
+                    
                     <table>
                       <thead>
                         <tr>
@@ -111,78 +174,47 @@
                       <td class="hourlyHumdity">68%</td>
                       <td class="hourlyWindSpeed">12mph</td>
                     </tr>
-                    <tr>
-                      <td>2:00PM</td>
-                      <td>⛅Partly Cloudy</td>
-                      <td>88°</td>
-                      <td>68%</td>
-                      <td>13mph</td>
-                    </tr>
-                    <tr>
-                      <td>3:00PM</td>
-                      <td>⛅Partly Cloudy</td>
-                      <td>88°</td>
-                      <td>70%</td>
-                     <td>13mph</td>
-                    </tr>
-                    <tr>
-                      <td>4:00PM</td>
-                      <td>⛅Partly Cloudy</td>
-                      <td>87°</td>
-                      <td>74%</td>
-                      <td>12mph</td>
-                    </tr>
-                    <tr>
-                      <td>5:00PM</td>
-                      <td>⛅Partly Cloudy</td>
-                      <td>86°</td>
-                      <td>77%</td>
-                      <td>12mph</td>
-                    </tr>
-                   <tr>
-                      <td>6:00PM</td>
-                      <td>⛅Partly Cloudy</td>
-                      <td>84°</td>
-                      <td>79%</td>
-                      <td>11mph</td>
-                    </tr>
                         </tbody>
                       </thead>
                     </table>
                   </div>
-                </div>
+
+              </div>
               <hr class="m-1" />
-              
               <!--Card 2, Row 3 has 6 Columns/Cards-->
               <div class="weeklyForecast" id="weekly-Forecast">
                 <!--Weekly Forecast HTML-->
                 <div class="row m-1 pb-3">
-                <div class="col-sm-2 p-0">
-                  <div class="card m-1 p-2 h-100 bg-card-details">
-                    <div class="forecast-date p-0">
+                  <div class="col-sm-2 p-0">
+                    <div class="card m-1 p-2 h-100 bg-card-details">
+                      <div class="forecast-date p-0"></div>
+                      <img
+                        src="./media/dustSand.png"
+                        class="forecast-icon"
+                        id="forecast-icon"
+                        alt="weekly forecast weather Icon"
+                      />
+                      <div>
+                        <span class="forecast-max-temp"></span> |
+                        <span class="forecast-min-temp"></span>
+                      </div>
                     </div>
-                    <img src="./media/dustSand.png" class="forecast-icon" id="forecast-icon" alt="weekly forecast weather Icon">
-                    <div>
-                    <span class="forecast-max-temp"></span> | 
-                    <span class="forecast-min-temp"></span>
-                    </div>
-                  </div>
-                  <!--End of Weekly Forecast HTML-->
+                    <!--End of Weekly Forecast HTML-->
                   </div>
                 </div>
               </div>
             </div>
-          </div>   
+          </div>
           <footer>
-                       
             <span class="credit-line">
-              Coded by Tiara Mendiola and is an open-source code on
-            <a href="https://github.com/Teewawa" class="src-link">GitHub</a>
-
+              <a href="https://github.com/Teewawa" class="src-link"
+                >Open-source</a
+              >
+              code by Tiara Mendiola
             </span>
           </footer>
-        </div>      
-      </div>   
+        </div>
+      </div>
     </div>
   </body>
   <script src="src/index.js"></script>
