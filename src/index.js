@@ -1,31 +1,78 @@
 //--------------------------------------TEST ZONE START-----------------------------------//
 
-function getMonth(nd) {
-  let months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sept",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  let month = months[nd.getMonth()];
-  return month;
-}
-
-function getDay(nd) {
-  let days = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
-  let day = days[nd.getDay()];
-  return day;
-}
-
 //------------------------------------------------------------------------------------------------------------//
+function updateHourlyWeatherIcon(code) {
+  let imgSrc = "";
+
+  //compare main weather description then call specific function
+  if (code === 1000) {
+    imgSrc = "clearSky";
+  } else if (code === 1003) {
+    imgSrc = "fewClouds";
+  } else if (code === 1006) {
+    imgSrc = "clouds";
+  } else if (code === 1009) {
+    imgSrc = "scatteredClouds";
+  } else if (code === 1030 || code === 1135 || code === 1147) {
+    imgSrc = "fogHazeMist";
+  } else if (
+    code === 1114 ||
+    code === 1210 ||
+    code === 1213 ||
+    code === 1219 ||
+    code === 1222 ||
+    code === 1225
+  ) {
+    imgSrc = "snow";
+  } else if (
+    code === 1066 ||
+    code === 1117 ||
+    code === 1198 ||
+    code === 1201 ||
+    code === 1255 ||
+    code === 1258
+  ) {
+    imgSrc = "snowRain";
+  } else if (
+    code === 1168 ||
+    code === 1171 ||
+    code === 1237 ||
+    code === 1261 ||
+    code === 1264
+  ) {
+    imgSrc = "freezing";
+  } else if (code === 1063 || code === 1180 || code === 1183 || code === 1186) {
+    imgSrc = "rain";
+  } else if (
+    code === 1150 ||
+    code === 1153 ||
+    code === 1189 ||
+    code === 1192 ||
+    code === 1195 ||
+    code === 1240 ||
+    code === 1243 ||
+    code === 1246
+  ) {
+    imgSrc = "rainShower";
+  } else if (code === 1072 || code === 1068) {
+    imgSrc = "drizzle";
+  } else if (
+    code === 1069 ||
+    code === 1204 ||
+    code === 1207 ||
+    code === 1249 ||
+    code === 1252
+  ) {
+    imgSrc = "sleet";
+  } else if (code === 1087 || code === 1279 || code === 1282) {
+    imgSrc = "thunderstorm";
+  } else if (code === 1273 || code === 1276) {
+    imgSrc = "thurderRain";
+  } else {
+    imgSrc = "dustSand";
+  }
+  return imgSrc;
+}
 
 //Format time displayed on page
 function formatHourlyTime(t) {
@@ -47,12 +94,10 @@ function formatHourlyTime(t) {
     hour = hour - 12;
     meridiem = "PM";
   }
-
-  if (hour === 0) {
+  if (hour == 00) {
     hour = 12;
   }
-  let time = `${hour}:${min} ${meridiem}`;
-
+  let time = `${hour}:${min}${meridiem}`;
   return time;
 }
 
@@ -71,51 +116,53 @@ function formatCityDateTime(response) {
 }
 
 function displayHourlyWeather(response) {
-  //console.log(`date time ${dateTime}`);
+  let countryElem = document.querySelector("#country");
+  let country = response.data.location.region;
+  countryElem.innerHTML = country;
+
   console.log(`this is history data`);
   console.log(response);
   let cityDateTime = formatCityDateTime(response);
-  console.log(`cityDateTime ${cityDateTime}`);
+  //console.log(`cityDateTime ${cityDateTime}`);
 
   //Manage inner HTML for hourly weather forecast
   let hourlyForecastElem = document.querySelector("#hourly-Forecast");
   let hourlyForecastHTML = `<div class="card p-1 m-1 bg-card-details">
-                    <table>
+                    <table style="width:100%">
                       <thead>
                         <tr>
-                          <th>
-                          Time
-                          </th>
-                          <th> Condition</th>
-                          <th> Temp</th>
-                          <th> Humdity</th>
-                          <th> Wind</th>
+                          <th style="width:15%">Time</th>                          
+                          <th style="width:20%" class="conditionHeader"> Condition</th>
+                          <th  style="width:10%" class="tempHeader"> Temp</th>
+                          <th  style="width:10%" class="humdityHeader"> Humdity</th>
+                          <th  style="width:10%" class="windHeader"> Wind</th>
                         </tr>
                         <tbody>`;
 
   let hourlyForecast = response.data.forecast.forecastday[0].hour;
-  //Iterate through first day to find match time and date, get index//
-  //console.log(hourlyForecast.forecastday[0].hour[0]);
+  //Iterate through first day to find match time and date, get index/
   let indexFlag = false;
   let counter = 0;
 
   hourlyForecast.forEach(function (forecast, index) {
-    //console.log(cityDateTime);
-    if (indexFlag === true && counter < 6) {
-      console.log(`counter: ${counter}`);
-      console.log(`indexFlagged- index:${index}`);
+    if (indexFlag === true && counter < 6 && forecast.time != cityDateTime) {
       counter = counter + 1;
-      //Manage the data for hourly data
 
+      //Manage the data for hourly data
       hourlyForecastHTML =
         hourlyForecastHTML +
         `<tr>
                       <td class="hourlyTime">${formatHourlyTime(
                         forecast.time
                       )}</td>
-                      <td class="hourlyDescription">⛅${
-                        forecast.condition.text
-                      }</td>
+                      <td class="hourlyDescription"><img
+                        src="./media/${updateHourlyWeatherIcon(
+                          forecast.condition.code
+                        )}.png"
+                        class="hourly-icon"
+                        id="hourly-icon"
+                        alt="weekly forecast weather Icon"
+                      /> ${forecast.condition.text}</td>
                       <td class="hourlyTemp">${Math.round(
                         forecast.temp_c
                       )}°C</td>
@@ -131,22 +178,44 @@ function displayHourlyWeather(response) {
       console.log(forecast.time);
       console.log(`I found it`);
       indexFlag = true;
+      match = true;
     }
   });
 
-  //Get index and iterate to display data
-  /*  indexFlag = indexFlag + 1;
-  hourlyForecastDay1.forEach(function (forecastday1, index) {
-    if (index > indexFlag && counter < 4) {
-      
-      counter = counter + 1;
-    } else {
-      //next
-    }
-  });
+  //Iterate through following day, if hourly data index reaches 23 (end of day)
+  let hourlyForecast1 = response.data.forecast.forecastday[1].hour;
+  if (counter < 6) {
+    hourlyForecast1.forEach(function (forecast, index) {
+      if (indexFlag === true && counter < 6) {
+        counter = counter + 1;
 
-  //End of iterations
-*/ //closing inner html data
+        //Manage the data for hourly data
+        hourlyForecastHTML =
+          hourlyForecastHTML +
+          `<tr>
+                      <td class="hourlyTime">${formatHourlyTime(
+                        forecast.time
+                      )}</td>
+                      <td class="hourlyDescription"><img
+                        src="./media/${updateHourlyWeatherIcon(
+                          forecast.condition.code
+                        )}.png"
+                        class="hourly-icon"
+                        id="hourly-icon"
+                        alt="weekly forecast weather Icon"
+                      /> ${forecast.condition.text}</td>
+                      <td class="hourlyTemp">${Math.round(
+                        forecast.temp_c
+                      )}°C</td>
+                      <td class="hourlyHumdity">${forecast.humidity}%</td>
+                      <td class="hourlyWindSpeed">${Math.round(
+                        forecast.wind_kph
+                      )}km/h</td>
+                    </tr>`;
+      }
+    });
+  }
+  //closing inner html data
   hourlyForecastHTML =
     hourlyForecastHTML +
     `       </tbody>
@@ -171,45 +240,68 @@ function getHourlyData(lattitude, longitude) {
 function displayCityTime(nd) {
   let hr = String(nd.getHours()).padStart(2, "0");
   let min = String(nd.getMinutes()).padStart(2, "0");
-  console.log(`display city time: ${hr}:${min}`);
+  let meridiem = "";
 
-  //___________________add inner HTML here
+  if (hr < 12) {
+    meridiem = "AM";
+  } else if (hr === 12) {
+    meridiem = "PM";
+  } else if (hr === 24) {
+    hr = hr - 12;
+    meridiem = "AM";
+  } else {
+    hr = hr - 12;
+    meridiem = "PM";
+  }
+  if (hr == 00) {
+    hr = 12;
+  }
+  console.log(`display city time: ${hr}:${min}${meridiem}`);
+  //update inner html to display city's time
+  let locationTime = `${hr}:${min}${meridiem}`;
+  let locationTimeElem = document.querySelector("#location-Time");
+  locationTimeElem.innerHTML = locationTime;
 }
 
 function displayCityDate(nd) {
-  let day = getDay(nd);
-  let month = getMonth(nd);
+  let days = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
+  let day = days[nd.getDay()];
+
+  let months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  let month = months[nd.getMonth()];
+
   let date = nd.getDate();
   let year = nd.getFullYear();
+
   console.log(`display city date: ${month} ${date}, ${year}`);
-  //___________________add inner HTML here
-}
-
-function calculateUTC(localTime, localOffset) {
-  let utc = localTime + localOffset * 60000;
-  return utc;
-}
-
-function getLocalTimezoneOffset() {
-  let now = new Date();
-  let localOffset = now.getTimezoneOffset();
-  return localOffset;
-}
-
-function getLocalTime() {
-  let now = new Date();
-  let localTime = now.getTime();
-  let lt = new Date(localTime);
-  console.log(`lt: ${lt}`);
-  return localTime;
+  //update inner html to display city's date
+  let locationDate = `${month} ${date}, ${year}`;
+  let locationDateElem = document.querySelector("#location-Date");
+  locationDateElem.innerHTML = locationDate;
 }
 
 //Notes--open weather timezone is in seconds
 function calculateCityTime(response) {
   //Calculates city's time
-  let localTime = getLocalTime();
-  let localOffset = getLocalTimezoneOffset();
-  let utc = calculateUTC(localTime, localOffset);
+  let now = new Date();
+  let localTime = now.getTime();
+  let lt = new Date(localTime);
+  console.log(`lt: ${lt}`);
+  let localOffset = now.getTimezoneOffset();
+  let utc = localTime + localOffset * 60000;
   let cityTimezoneOffset = response.data.timezone_offset;
   let cityTime = utc + 1000 * cityTimezoneOffset;
   let nd = new Date(cityTime);
@@ -292,7 +384,7 @@ function getTimeNow() {
   if (hour === 0) {
     hour = 12;
   }
-  let time = `${hour}:${minutes}:${seconds} ${meridiem}`;
+  let time = `${hour}:${minutes}:${seconds}${meridiem}`;
   timeNow.innerHTML = `${time}`;
 
   //Performs function for a 'live clock'
@@ -415,7 +507,6 @@ function displayWeeklyForecast(response) {
   let weeklyForecastElem = document.querySelector("#weekly-Forecast");
   // console.log(response.data.daily);
   let forecast = response.data.daily;
-  console.log(`jsesgss`);
   console.log(forecast);
   let weeklyForecastHTML = `<div class="row m-1 pb-3">`;
   forecast.forEach(function (forecastDay, index) {
@@ -669,9 +760,14 @@ function getTemperature(response) {
   celsiusTemperature = response.data.main.temp;
 }
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 //Get & display the weather forecast description
 function getWeatherDescription(response) {
   let description = response.data.weather[0].description;
+  description = capitalizeFirstLetter(description);
   let descriptionElem = document.querySelector(".weatherStatus");
   descriptionElem.innerHTML = `${description}`;
 }
@@ -680,8 +776,7 @@ function getWeatherDescription(response) {
 function getLocation(response) {
   let locationElement = document.querySelector("#location");
   let city = response.data.name;
-  let country = response.data.sys.country;
-  let location = `${city}, ${country}`;
+  let location = `${city},`;
   let timeZone = response.data.timezone;
   locationElement.innerHTML = `${location}`;
   console.log(response.data);
@@ -706,16 +801,22 @@ function searchLocation(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-input");
   let location = document.querySelector("#location");
+  let country = document.querySelector("#country");
 
   //Conditions for blank entries
   let input = searchInput.value.trim();
   if (input) {
-    location.innerHTML = `Searching city...`;
+    location.innerHTML = ` `;
+    country.innerHTML = ` `;
 
     //------------------consider an invalid city search here-------------------------------//
+  } else if ((isAxiosError = true)) {
+    alert("Please enter a city name.");
+    location.innerHTML = `try again`;
+    country.innerHTML = ` `;
   } else {
     location.innerHTML = null;
-    alert("Please enter a city.");
+    alert("Please enter a city name.");
   }
 
   let city = searchInput.value;
@@ -793,4 +894,4 @@ let currentLocationBttn = document.querySelector("#currentLocationBttn");
 currentLocationBttn.addEventListener("click", clickedCurrent);
 
 //Default display upon loading page
-displayDefaultWeather("Guam");
+displayDefaultWeather("Hagåtña");
