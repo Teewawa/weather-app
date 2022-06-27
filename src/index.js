@@ -358,7 +358,7 @@ function getTodaysDate(now) {
   let date = now.getDate();
   let year = now.getFullYear();
 
-  return `${day}, ${month} ${date}, ${year}`;
+  return `Today is ${day}, ${month} ${date}, ${year}`;
 }
 
 //Time format: 12-hour period AM/PM
@@ -810,10 +810,6 @@ function searchLocation(event) {
     country.innerHTML = ` `;
 
     //------------------consider an invalid city search here-------------------------------//
-  } else if ((isAxiosError = true)) {
-    alert("Please enter a city name.");
-    location.innerHTML = `try again`;
-    country.innerHTML = ` `;
   } else {
     location.innerHTML = null;
     alert("Please enter a city name.");
