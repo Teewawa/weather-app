@@ -24,18 +24,24 @@
             <!--Card 1, h-100: same card heights-->
             <div class="card p-3 h-100 bg-card-left">
               <div class="row p-0">
-                <form id="search-form">
-                  <input
-                    type="text"
-                    id="search-input"
-                    placeholder="Search for a city..."
-                    autocomplete="off"
-                    autofocus="on"
-                    class="rounded"
-                  />
-                </form>
+                
+                  <form id="search-form">
+                    <input
+                      type="text"
+                      id="search-input"
+                      placeholder="Search for a city..."
+                      autocomplete="off"
+                      autofocus="on"
+                      class="rounded"
+                    />
+                  </form>
+                
               </div>
-              <h1 class="location" id="location"></h1>
+              <div class="locationTimeDate"><span class="locationTime" id="location-Time"></span> -
+                <span class="locationDate" id="location-Date"></span>
+              </div>
+              <span><h1 class="location" id="location"></h1><h1 class="country" id="country"></h1></span>
+              
               <div class="weatherForecast">
                 <span class="temp" id="temperature"></span
                 ><small class="units"
@@ -53,8 +59,7 @@
                 />
               </div>
               
-                Check my location
-              </button>
+
          <!---->
               <div class="row p-0 mt-2">
                 <div class="col p-1 just-left">
@@ -102,74 +107,42 @@
                 <div class="col-sm-3 p-0">
                   <br />
 
+                 <div class="LocationBttn">
                  <button type="button" class="btn btn-warning p-1 m-0" id="currentLocationBttn">Check my location</button>
+                </div>
 
                 </div>
               </div>
-            
-            
-              <!-------------Testing-----------------------------------------------
-              <div class="card p-1 m-1 bg-card-details">  
-                <div class="testing" id="testing">
-                  <div>City:</div>
-                  <div>timezone:</div>
-                  <div>time:</div>
-                  <div>sunrise:</div>
-                  <span>sunset: </span>
-                </div>
-                
-
-                <div class="row p-0 mt-2">
-                  <div class="col p-1 just-left">
-                    <img
-                      src="./media/feelsLikeTemp.png"
-                      class="feelsLikeIcon"
-                      alt="thermostat"
-                    />
-                    Feels like: <span id="feelsLike"></span>
-                  </div>
-                  <div class="row p-0">
-                    <div class="col p-1 just-left">
-                      <img
-                        src="./media/humidity.png"
-                        class="humidityIcon"
-                        alt="humidity icon"
-                      />
-                      Humidity: <span id="humidity"></span>
-                    </div>
-                  </div>
-                  <div class="row p-0">
-                    <div class="col p-1 just-left">
-                      <img
-                        src="./media/windSpeed.png"
-                        class="windSpeedIcon"
-                        alt="wind speed icon"
-                      />
-                      Wind: <span id="windSpeed"></span>
-                    </div>
-                  </div>
-                </div>
-                      -----------End of testing-------------------------------------->
-                
+                      
                 <!--Card 2, 1 Card with Table-->
                   <div class="hourlyForecast" id="hourly-Forecast">
                   <div class="card p-1 m-1 bg-card-details">
                     
-                    <table>
+                    <table style="width:100%">
                       <thead>
                         <tr>
-                          <th>
-                          Time
-                          </th>
-                          <th> Condition</th>
-                          <th> Temp</th>
-                          <th> Humdity</th>
-                          <th> Wind</th>
+                          <th style="width:10%">Time</th>
+                          
+                          <th style="width:30%" class="conditionHeader"> Condition</th>
+                          <th style="width:1%" class="tempHeader"> Temp</th>
+                          <th style="width:1%" class="humdityHeader"> Humdity</th>
+                          <th style="width:1%" class="windHeader"> Wind</th>
                         </tr>
                         <tbody>
                       <tr>
                       <td class="hourlyTime">1:00PM</td>
-                      <td class="hourlyDescription">⛅Partly Cloudy</td>
+                      <td class="hourlyDescription"><img
+                        src="./media/dustSand.png"
+                        class="hourly-icon"
+                        id="hourly-icon"
+                        alt="weekly forecast weather Icon"
+                      /> Partly Cloudy</td>
+                      <td><img
+                        src="./media/dustSand.png"
+                        class="hourly-icon"
+                        id="hourly-icon"
+                        alt="weekly forecast weather Icon"
+                      /></td>
                       <td class="hourlyTemp">88°</td>
                       <td class="hourlyHumdity">68%</td>
                       <td class="hourlyWindSpeed">12mph</td>
