@@ -14,10 +14,11 @@ body {
 .card {
   text-align: center;
 }
-#search {
-  background-color: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(192, 192, 192, 0.4);
-  width: 50%;
+#search-input {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.135);
+  width: 95%;
+  max-width: 200px;
 }
 .greeting {
   text-align: left;
@@ -33,7 +34,7 @@ button {
   text-align: left;
 }
 .card.bg-card-left {
-  background-color: rgba(247, 244, 245, 0.5);
+  background-color: rgba(247, 244, 245, 0.6);
 }
 .just-right {
   text-align: center;
@@ -43,7 +44,7 @@ button {
   text-align: center;
 }
 .card.bg-card-right {
-  background-color: rgba(247, 244, 245, 0.5);
+  background-color: rgba(247, 244, 245, 0.6);
 }
 
 .card.bg-card-details {
@@ -51,11 +52,40 @@ button {
 }
 
 .location {
-  font-size: 25px;
-  margin: 20px auto 1px;
+  font-size: 27px;
+  margin: 5px 0px 0px 0px;
+  padding: 0px;
+}
+.country {
+  font-size: 22px;
+  padding: 0px;
+  margin: 0px;
+  font-weight: 400;
+}
+.locationTimeDate {
+  margin-top: 10px;
+}
+.locationTime {
+  font-size: 14px;
+  padding: 0px;
+  margin: 0px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+.locationDate {
+  font-size: 14px;
+  padding: 0px;
+  margin: 0px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+.weatherForecast {
+  margin: 0px;
+  padding: 0;
 }
 .temp {
-  padding: 2px 0px 0px 0px;
+  margin: 0px;
+  padding: 0px 0px 0px 0px;
   font-size: 60px;
   position: relative;
   right: -20px;
@@ -71,7 +101,7 @@ button {
   top: -30px;
 }
 .weatherStatus {
-  font-size: 16px;
+  font-size: 20px;
   padding: 0px;
   margin: 0px;
 }
@@ -80,7 +110,7 @@ button {
   padding: 0px;
   margin: 0px;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 #fahrenheit-link {
   text-decoration: none;
@@ -132,6 +162,12 @@ button {
   margin: 1px;
   padding: 2px;
 }
+#currentLocationBttn {
+  margin: 0px;
+  padding: 0px;
+  width: 95%;
+  max-width: 145px;
+}
 table {
   padding: 1px;
   margin: 1px;
@@ -147,16 +183,34 @@ table {
   font-size: 16px;
   opacity: 0.7;
 }
+
 .forecast-icon {
   max-width: 60px;
   padding: 0px;
   margin: 0px auto;
 }
+
 .forecast-max-temp {
   font-size: 14px;
   font-weight: bold;
 }
+
 .forecast-min-temp {
   font-size: 14px;
   opacity: 0.7;
+}
+
+.hourly-icon {
+  max-width: 30px;
+  padding: 0px;
+  margin: 0px;
+  text-align: center;
+}
+
+.hourlyDescription {
+  font-size: 15px;
+  text-align: center;
+}
+.conditionHeader {
+  text-align: center;
 }
