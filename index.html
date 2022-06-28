@@ -12,6 +12,9 @@
     />
     <link rel="stylesheet" href="src/styles.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+   <style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Gentium+Basic&family=Xanh+Mono:ital@0;1&display=swap');
+</style>
     <title>Wk7 Homework: Vanilla Weather App</title>
   </head>
   <body>
@@ -36,9 +39,8 @@
                     />
                   </form>
                 
-              </div>
-              <div class="locationTimeDate"><span class="locationTime" id="location-Time"></span> -
-                <span class="locationDate" id="location-Date"></span>
+              <div class="locationTimeDate"><span class="locationDate" id="location-Date"></span> <span class="locationTime" id="location-Time"></span>
+                
               </div>
               <span><h1 class="location" id="location"></h1><h1 class="country" id="country"></h1></span>
               
@@ -62,23 +64,24 @@
 
          <!---->
               <div class="row p-0 mt-2">
-                <div class="col p-1 just-left">
+                <div class="col p-0 just-left">
                   <img src="./media/feelsLikeTemp.png" class="feelsLikeIcon" alt="thermostat">
                   Feels like: <span id="feelsLike"></span> 
                 </div>
               </div> 
  
               <div class="row p-0">
-                <div class="col p-1 just-left">
+                <div class="col p-0 just-left">
                   <img src="./media/humidity.png" class="humidityIcon" alt="humidity icon">
                   Humidity: <span id="humidity"></span>
                 </div>
               </div>
               <div class="row p-0">
-                <div class="col p-1 just-left">
+                <div class="col p-0 just-left">
                   <img src="./media/windSpeed.png" class="windSpeedIcon" alt="wind speed icon"> 
                   Wind: <span id="windSpeed"></span>
                 </div>
+              </div>
               </div>
             </div>
     <!---->
@@ -136,7 +139,7 @@
                         class="hourly-icon"
                         id="hourly-icon"
                         alt="weekly forecast weather Icon"
-                      /> Partly Cloudy</td>
+                      />Partly Cloudy</td>
                       <td><img
                         src="./media/dustSand.png"
                         class="hourly-icon"
@@ -157,7 +160,7 @@
               <!--Card 2, Row 3 has 6 Columns/Cards-->
               <div class="weeklyForecast" id="weekly-Forecast">
                 <!--Weekly Forecast HTML-->
-                <div class="row m-1 pb-3">
+                <div class="row m-1 pt-1 pb-2">
                   <div class="col-sm-2 p-0">
                     <div class="card m-1 p-2 h-100 bg-card-details">
                       <div class="forecast-date p-0"></div>

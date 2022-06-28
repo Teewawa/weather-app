@@ -5,6 +5,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0vw;
+  font-family: "serif", serif;
 }
 .weatherApp {
   margin: 0 auto;
@@ -53,33 +54,42 @@ button {
   background-color: rgba(247, 244, 245, 0.4);
 }
 
-.location {
-  font-size: 27px;
-  margin: 5px 0px 0px 0px;
-  padding: 0px;
-}
-.country {
-  font-size: 22px;
-  padding: 0px;
-  margin: 0px;
-  font-weight: 400;
-}
 .locationTimeDate {
+  background-color: rgba(247, 244, 245, 0.3);
+  border-radius: 4px;
+  width: 95%;
+  max-width: 160px;
+  margin: 0 auto;
+  padding: 0;
   margin-top: 10px;
 }
 .locationTime {
-  font-size: 14px;
-  padding: 0px;
+  font-size: 15px;
+  padding: 1px;
   margin: 0px;
-  font-weight: 500;
+  font-weight: 400;
   margin-top: 10px;
 }
 .locationDate {
-  font-size: 14px;
+  font-size: 15px;
+  padding: 1px;
+  margin: 0px;
+  font-weight: 400;
+  margin-top: 10px;
+}
+
+.location {
+  font-size: 28px;
+  margin: 5px 0px 0px 0px;
+  padding: 1px;
+  font-weight: 500;
+}
+
+.country {
+  font-size: 25px;
   padding: 0px;
   margin: 0px;
-  font-weight: 500;
-  margin-top: 10px;
+  font-weight: 400;
 }
 .weatherForecast {
   margin: 0px;
@@ -91,6 +101,7 @@ button {
   font-size: 60px;
   position: relative;
   right: -20px;
+  font-weight: 500;
 }
 .active {
   color: black;
@@ -106,6 +117,7 @@ button {
   font-size: 20px;
   padding: 0px;
   margin: 0px;
+  font-weight: 500;
 }
 .weatherIcon-main {
   max-width: 85px;
@@ -113,6 +125,19 @@ button {
   margin: 0px;
   margin-top: 10px;
   margin-bottom: 5px;
+}
+#feelsLike {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#humidity {
+  font-size: 16px;
+  font-weight: bold;
+}
+#windSpeed {
+  font-size: 16px;
+  font-weight: bold;
 }
 #fahrenheit-link {
   text-decoration: none;
@@ -128,7 +153,7 @@ button {
   text-decoration: none;
 }
 .feelsLikeIcon {
-  max-width: 35px;
+  max-width: 30px;
   padding: 0px;
   margin: 0px;
 }
@@ -147,8 +172,14 @@ button {
   padding: 0px;
   margin: 0px;
 }
+#date-today {
+  font-size: 16px;
+}
+#time-now {
+  font-size: 16px;
+}
 .greeting {
-  font-size: 35px;
+  font-size: 33px;
   padding: 0px;
   margin: 0px;
 }
@@ -165,20 +196,31 @@ button {
   padding: 2px;
 }
 #currentLocationBttn {
+  background-color: #fddb3a;
   margin: 0px;
   padding: 0px;
   width: 95%;
   max-width: 145px;
 }
 table {
-  padding: 1px;
-  margin: 1px;
+  padding: 2px;
+  margin: 2px;
 }
-.credit-line {
-  color: white;
+.hourlyForecast {
+  font-size: 16px;
 }
-.src-link {
-  color: white;
+.hourly-icon {
+  max-width: 30px;
+  padding: 0px;
+  margin: 0px;
+  text-align: left;
+}
+
+.hourlyDescription {
+  text-align: center;
+}
+.conditionHeader {
+  text-align: center;
 }
 
 .forecast-date {
@@ -202,17 +244,10 @@ table {
   opacity: 0.7;
 }
 
-.hourly-icon {
-  max-width: 30px;
-  padding: 0px;
-  margin: 0px;
-  text-align: center;
+.credit-line {
+  color: white;
+  background-color: #9292925b;
 }
-
-.hourlyDescription {
-  font-size: 15px;
-  text-align: center;
-}
-.conditionHeader {
-  text-align: center;
+.src-link {
+  color: white;
 }
