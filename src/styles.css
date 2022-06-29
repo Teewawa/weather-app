@@ -84,9 +84,14 @@ button {
   padding: 1px;
   font-weight: 500;
 }
-
+.region {
+  font-size: 23px;
+  padding: 0px;
+  margin: 0px;
+  font-weight: 400;
+}
 .country {
-  font-size: 25px;
+  font-size: 23px;
   padding: 0px;
   margin: 0px;
   font-weight: 400;

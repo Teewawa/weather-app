@@ -587,9 +587,14 @@ function formatCityDateTime(response) {
 //Gets hourly forecast and store into arrays, then calls function to display C output
 function formatHrCityData(response) {
   //display country
-  let countryElem = document.querySelector("#country");
-  let country = response.data.location.region;
-  countryElem.innerHTML = country;
+  let regionElem = document.querySelector("#region");
+  let region = response.data.location.region;
+  region = `${region}, `;
+  regionElem.innerHTML = region;
+
+  console.log(region);
+  console.log(response);
+
   let cityDateTime = formatCityDateTime(response);
 
   //Iterate through first day to find match time and date, get index/
@@ -807,10 +812,15 @@ function getWeatherDescription(response) {
 //Get & display the location
 function getLocation(response) {
   let locationElement = document.querySelector("#location");
+  let countryElem = document.querySelector("#country");
   let city = response.data.name;
-  let location = `${city},`;
+  let location = `${city}`;
+  let country = response.data.sys.country;
   let timeZone = response.data.timezone;
   locationElement.innerHTML = `${location}`;
+  countryElem.innerHTML = country;
+  console.log(`getLocation:`);
+  console.log(response);
   return city;
 }
 //---^^^ Update Main/Current Forecast ^^^//vvv Collection of function call to display forecast vvv---//
