@@ -536,7 +536,7 @@ function updateHourlyWeatherIcon(code) {
   } else if (code === 1087 || code === 1279 || code === 1282) {
     imgSrc = "thunderstorm";
   } else if (code === 1273 || code === 1276) {
-    imgSrc = "thurderRain";
+    imgSrc = "thunderRain";
   } else {
     imgSrc = "dustSand";
   }
@@ -591,10 +591,6 @@ function formatHrCityData(response) {
   let region = response.data.location.region;
   region = `${region}, `;
   regionElem.innerHTML = region;
-
-  console.log(region);
-  console.log(response);
-
   let cityDateTime = formatCityDateTime(response);
 
   //Iterate through first day to find match time and date, get index/
@@ -703,11 +699,11 @@ function displayCityDate(nd) {
     "Dec",
   ];
   let month = months[nd.getMonth()];
-  let date = nd.getDate();
+  let date = String(nd.getDate()).padStart(2, "0");
   let year = nd.getFullYear();
 
   //update inner html to display city's date
-  let locationDate = `${month} ${date}, ${year}`;
+  let locationDate = `${day}, ${month} ${date}, ${year}`;
   let locationDateElem = document.querySelector("#location-Date");
   locationDateElem.innerHTML = locationDate;
 }
@@ -819,8 +815,6 @@ function getLocation(response) {
   let timeZone = response.data.timezone;
   locationElement.innerHTML = `${location}`;
   countryElem.innerHTML = country;
-  console.log(`getLocation:`);
-  console.log(response);
   return city;
 }
 //---^^^ Update Main/Current Forecast ^^^//vvv Collection of function call to display forecast vvv---//
