@@ -649,7 +649,7 @@ function getHrCityData(lattitude, longitude) {
   let lat = lattitude;
   let lon = longitude;
   let apiKey = "15c74ef636a145179c8223450222506";
-  apiUrl = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${lon}&days=2&aqi=no&alerts=no
+  apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${lon}&days=2&aqi=no&alerts=no
 `;
   axios.get(apiUrl).then(formatHrCityData);
 }
