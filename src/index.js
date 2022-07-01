@@ -589,7 +589,7 @@ function formatHrCityData(response) {
   //display country
   let regionElem = document.querySelector("#region");
   let region = response.data.location.region;
-  region = `${region}, `;
+  region = `${region} `;
   regionElem.innerHTML = region;
   let cityDateTime = formatCityDateTime(response);
 
