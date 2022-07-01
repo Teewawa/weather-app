@@ -17,10 +17,15 @@ body {
 }
 #search-input {
   background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.135);
+  border: 2px solid rgba(255, 255, 255, 0.005);
   width: 95%;
   max-width: 200px;
+  background-image: url(../media/searchicon.png);
+  background-size: 33px;
+  background-repeat: no-repeat;
+  padding: 5px 10px 5px 40px;
 }
+
 .greeting {
   text-align: left;
 }
@@ -33,8 +38,21 @@ body {
   font-size: 14px;
 }
 button {
-  width: 150px;
+  display: inline;
+  max-width: 500;
   text-align: left;
+}
+#currentLocationBttn {
+  background-color: #fddb3a;
+  margin: 0px;
+  padding: 0px;
+  width: 95%;
+  max-width: 175px;
+}
+
+.myLocationIcon {
+  display: inline;
+  max-width: 23px;
 }
 .card.bg-card-left {
   background-color: rgba(247, 244, 245, 0.6);
@@ -58,7 +76,7 @@ button {
   background-color: rgba(247, 244, 245, 0.3);
   border-radius: 4px;
   width: 95%;
-  max-width: 160px;
+  max-width: 190px;
   margin: 0 auto;
   padding: 0;
   margin-top: 10px;
@@ -200,13 +218,7 @@ button {
   margin: 1px;
   padding: 2px;
 }
-#currentLocationBttn {
-  background-color: #fddb3a;
-  margin: 0px;
-  padding: 0px;
-  width: 95%;
-  max-width: 145px;
-}
+
 table {
   padding: 2px;
   margin: 2px;
