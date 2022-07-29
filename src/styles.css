@@ -10,7 +10,7 @@ body {
 .weatherApp {
   margin: 0 auto;
   max-width: 900px;
-  margin-top: 15px;
+  margin-top: 6vh;
 }
 .card {
   text-align: center;
