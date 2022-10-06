@@ -464,7 +464,7 @@ function formatWeeklyForecast(response) {
 function getWeeklyForecast(response) {
   let lattitude = response.data.coord.lat;
   let longitude = response.data.coord.lon;
-  let apiKey = "32002ce1ac753de34a94e79ba08a9e9b";
+  let apiKey = "1533bdc9213c1c9fd3beb06b132ca211";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lattitude}&lon=${longitude}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(formatWeeklyForecast);
 }
@@ -730,7 +730,7 @@ function calculateCityTime(response) {
 function getHourlyForecast(response) {
   let lattitude = response.data.coord.lat;
   let longitude = response.data.coord.lon;
-  let apiKey = "32002ce1ac753de34a94e79ba08a9e9b";
+  let apiKey = "1533bdc9213c1c9fd3beb06b132ca211";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lattitude}&lon=${longitude}&exclude=minutely,weekly,alerts&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(calculateCityTime);
 }
@@ -850,7 +850,7 @@ function searchLocation(event) {
 
   let city = searchInput.value;
   let units = "metric";
-  let apiKey = "32002ce1ac753de34a94e79ba08a9e9b";
+  let apiKey = "1533bdc9213c1c9fd3beb06b132ca211";
   let apiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
   let apiUrl = `${apiEndpoint}?q=${city}&appid=${apiKey}&units=${units}`;
 
@@ -866,7 +866,7 @@ function getPosition(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
   let units = "metric";
-  let apiKey = "32002ce1ac753de34a94e79ba08a9e9b";
+  let apiKey = "1533bdc9213c1c9fd3beb06b132ca211";
   let apiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
   let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
   //Get weather data
@@ -881,7 +881,7 @@ function clickedCurrent() {
 //Displays default weather based on specific city provided
 function displayDefaultWeather(city) {
   let units = "metric";
-  let apiKey = "32002ce1ac753de34a94e79ba08a9e9b";
+  let apiKey = "1533bdc9213c1c9fd3beb06b132ca211";
   let apiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
   let apiUrl = `${apiEndpoint}?q=${city}&appid=${apiKey}&units=${units}`;
   //Get weather data
